@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+
 
 # Create your models here.
 
@@ -32,15 +34,11 @@ class Produto(models.Model):
         return self.nome
 
 
-""" class Usuario(models.Model):
-    nome = models.CharField(max_length=255)
-    email = models.EmailField(unique=True)
-    #senha = models.CharField(max_length=255)
-    funcao = models.CharField(max_length=255)
-    tag_rfid = models.CharField(max_length=255, unique=True)
+class Usuario (AbstractUser):
+    tag_rfid = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
-        return self.nome """
+        return self.username
 
 
 class Movimentacao(models.Model):
