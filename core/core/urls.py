@@ -17,6 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from estoque import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/movimentacao/', views.criar_movimentacao, name='criar_movimentacao'),
+    path('api/produto/buscar/', views.buscar_produto_por_tag, name='buscar_produto_por_tag'),
+    path('api/usuario/buscar/', views.buscar_usuario_por_tag, name='buscar_usuario_por_tag'),
 ]
