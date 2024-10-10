@@ -46,7 +46,7 @@ def buscar_produto_por_tag(request):
             
             # Verifica se o campo tag_rfid foi enviado
             if not tag_rfid:
-                return JsonResponse({'error': 'Campo tag_rfid não fornecido'}, status=400)
+                return JsonResponse({'error': 'Campo tag_rfid nao fornecido'}, status=400)
 
             # Busca o produto com base na tag RFID
             try:
@@ -54,12 +54,12 @@ def buscar_produto_por_tag(request):
                 # Retorna o ID do produto
                 return JsonResponse({'produto_id': produto.id}, status=200)
             except Produto.DoesNotExist:
-                return JsonResponse({'error': 'Produto não encontrado'}, status=404)
+                return JsonResponse({'error': 'Produto nao encontrado'}, status=404)
         
         except json.JSONDecodeError:
-            return JsonResponse({'error': 'Formato JSON inválido'}, status=400)
+            return JsonResponse({'error': 'Formato JSON invalido'}, status=400)
     
-    return JsonResponse({'error': 'Método não permitido'}, status=405)
+    return JsonResponse({'error': 'Metodo nao permitido'}, status=405)
 
 
 
@@ -73,7 +73,7 @@ def buscar_usuario_por_tag(request):
             
             # Verifica se o campo tag_rfid foi enviado
             if not tag_rfid:
-                return JsonResponse({'error': 'Campo tag_rfid não fornecido'}, status=400)
+                return JsonResponse({'error': 'Campo tag_rfid nao fornecido'}, status=400)
 
             # Busca o produto com base na tag RFID
             try:
@@ -81,9 +81,9 @@ def buscar_usuario_por_tag(request):
                 # Retorna o ID do produto
                 return JsonResponse({'usuario_id': usuario.id}, status=200)
             except Usuario.DoesNotExist:
-                return JsonResponse({'error': 'Usuário não encontrado'}, status=404)
+                return JsonResponse({'error': 'Usuario nao encontrado'}, status=404)
         
         except json.JSONDecodeError:
-            return JsonResponse({'error': 'Formato JSON inválido'}, status=400)
+            return JsonResponse({'error': 'Formato JSON invalido'}, status=400)
     
-    return JsonResponse({'error': 'Método não permitido'}, status=405)
+    return JsonResponse({'error': 'Metodo nao permitido'}, status=405)
