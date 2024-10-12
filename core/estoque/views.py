@@ -19,6 +19,24 @@ def criar_movimentacao(request):
             dia = data.get('data')
             tipo = data.get('tipo')  # Por exemplo, entrada ou saída
 
+            #antes de criar a instancia fazer as verificacoes
+
+            #verificar se o produto já foi cadastrado ou baixado
+            #consultar a ultima instancia dele, e ver se eh o oposto do que estou mandando
+            ultima_movimentacao = Movimentacao.objects.filter(produto_id=produto_id).order_by('-data', '-id').first()
+
+            # Se existe uma movimentação anterior, faça as verificações
+            if ultima_movimentacao:
+                if ultima_movimentacao.tipo == tipo:
+                    if tipo == 'Entrada':
+                        return JsonResponse({'error': 'O Produto ja esta no estoque'}, status=400)
+                    elif tipo == 'Saida':
+                        return JsonResponse({'error': 'O Produto nao esta no estoque'}, status=400)
+            else:
+                #ok, não existe movimentação anterior, mas verificar se o tipo eh saida. Para não contabilizar primerio uma saida
+                if tipo == 'Saida':
+                    return JsonResponse({'error' : 'Produto nao esta no estoque'}, status=400)
+
             # Cria uma nova instância de Movimentação
             movimentacao = Movimentacao(produto_id=produto_id, usuario_id=usuario_id, data=dia, tipo=tipo)
             movimentacao.save()  # Salva no banco de dados
