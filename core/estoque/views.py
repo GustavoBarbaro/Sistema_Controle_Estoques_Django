@@ -23,7 +23,8 @@ def criar_movimentacao(request):
 
             #verificar se o produto já foi cadastrado ou baixado
             #consultar a ultima instancia dele, e ver se eh o oposto do que estou mandando
-            ultima_movimentacao = Movimentacao.objects.filter(produto_id=produto_id).order_by('-data', '-id').first()
+            # ultima_movimentacao = Movimentacao.objects.filter(produto_id=produto_id).order_by('-data', '-id').first()
+            ultima_movimentacao = Movimentacao.objects.filter(produto_id=produto_id).order_by('-id').first()
 
             # Se existe uma movimentação anterior, faça as verificações
             if ultima_movimentacao:
@@ -35,14 +36,14 @@ def criar_movimentacao(request):
             else:
                 #ok, não existe movimentação anterior, mas verificar se o tipo eh saida. Para não contabilizar primerio uma saida
                 if tipo == 'Saida':
-                    return JsonResponse({'error' : 'Produto nao esta no estoque'}, status=400)
+                    return JsonResponse({'error' : 'O Produto nao esta no estoque'}, status=400)
 
             # Cria uma nova instância de Movimentação
             movimentacao = Movimentacao(produto_id=produto_id, usuario_id=usuario_id, data=dia, tipo=tipo)
             movimentacao.save()  # Salva no banco de dados
 
             # Retorna uma resposta de sucesso
-            return JsonResponse({'status': 'Movimentação criada com sucesso'}, status=201)
+            return JsonResponse({'status': 'Movimentacao criada com sucesso'}, status=201)
         
         except KeyError as e:
             return JsonResponse({'error': f'Campo {str(e)} faltando'}, status=400)
