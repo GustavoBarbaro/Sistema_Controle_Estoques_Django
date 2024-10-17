@@ -53,6 +53,36 @@ def criar_movimentacao(request):
 
     return JsonResponse({'error': 'Método não permitido'}, status=405)
 
+@csrf_exempt  # Desativa a verificação CSRF para permitir requisições externas
+def verifica_status(request):
+    if request.method == 'POST':
+        try:
+            # Converte o corpo da requisição para JSON
+            data = json.loads(request.body.decode('utf-8'))
+
+            # Extraia os dados conforme os campos do seu modelo
+            produto_id = data.get('produto_id')
+
+            ultima_movimentacao = Movimentacao.objects.filter(produto_id=produto_id).order_by('-id').first()
+
+            # Se existe uma movimentação anterior, faça as verificações
+            if ultima_movimentacao:
+                if ultima_movimentacao.tipo == 'Entrada':
+                    return JsonResponse({'error': 'O Produto ja esta no estoque'}, status=400)
+                elif ultima_movimentacao.tipo == 'Saida':
+                    return JsonResponse({'error': 'O Produto nao esta no estoque'}, status=400)
+            else:
+                #ok, não existe movimentação anterior
+                return JsonResponse({'error' : 'O Produto nao esta no estoque'}, status=400)
+        
+        except KeyError as e:
+            return JsonResponse({'error': f'Campo {str(e)} faltando'}, status=400)
+        
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Formato JSON inválido'}, status=400)
+
+    return JsonResponse({'error': 'Método não permitido'}, status=405)
+
 
 
 @csrf_exempt
