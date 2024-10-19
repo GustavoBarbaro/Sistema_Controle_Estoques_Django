@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <body><h1>Sistema de Controle de Estoque</h1></body>
+
+    <p>Data Atual : {{today}}</p>
+
+    <a href="{% url 'home.estoque' %}" class="btn btn-primary">Ir para Estoque</a>
+    <a href="{% url 'home.LogEstoque' %}" class="btn btn-primary">Ir para log completo</a>
+
+
+{% endblock %}
+
