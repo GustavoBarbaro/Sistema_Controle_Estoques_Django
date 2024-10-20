@@ -8,23 +8,23 @@
             <tr>
                 <th>#</th>
                 <th>Produto</th>
-                <th>Última Movimentação</th>
                 <th>Usuário</th>
+                <th>Tipo</th>
                 <th>Data</th>
             </tr>
         </thead>
         <tbody>
-            {% for item in estoque %}
+            {% for movimentacao in estoque %}
             <tr>
                 <td>{{ forloop.counter }}</td>
-                <td>{{ item.nome }}</td>  <!-- Acesso ao nome do produto -->
-                <td>{{ item.movimentacao_set.last.get_tipo_display }}</td> <!-- Exibe o tipo da última movimentação -->
-                <td>{{ item.movimentacao_set.last.usuario.nome }}</td> <!-- Exibe o usuário da última movimentação -->
-                <td>{{ item.movimentacao_set.last.data }}</td> <!-- Exibe a data da última movimentação -->
+                <td>{{ movimentacao.produto.nome }}</td>
+                <td>{{ movimentacao.usuario.username }}</td>
+                <td>{{ movimentacao.get_tipo_display }}</td>
+                <td>{{ movimentacao.data }}</td>
             </tr>
             {% empty %}
             <tr>
-                <td colspan="5" class="text-center">Nenhum produto disponível no estoque.</td>
+                <td colspan="5" class="text-center">Nenhuma movimentação encontrada.</td>
             </tr>
             {% endfor %}
         </tbody>

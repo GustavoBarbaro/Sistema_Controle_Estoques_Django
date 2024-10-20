@@ -4,7 +4,7 @@ from datetime import datetime
 from django.views.generic import TemplateView, ListView
 
 from estoque.models import Movimentacao
-from django.db.models import Subquery, OuterRef
+from django.db.models import Subquery, OuterRef, Max
 
 
 class HomeView(TemplateView):
@@ -22,20 +22,25 @@ class EstoqueView(ListView):
     context_object_name = 'estoque'  # Nome do contexto para o template
 
     def get_queryset(self):
-        # Subquery para obter a última movimentação (maior ID) de cada produto
+        # Obtemos o ID da última movimentação para cada produto
         ultima_movimentacao = (
             Movimentacao.objects
-            .filter(produto=OuterRef('pk'))  # Filtra pela chave primária do produto
-            .order_by('-id')  # Ordena decrescentemente pelo ID
-            .values('tipo')[:1]  # Pega apenas o tipo da última movimentação
+            .values('produto')  # Agrupa por produto
+            .annotate(ultima_id=Max('id'))  # Obtém a última data
         )
 
-        # Filtra os produtos cuja última movimentação foi do tipo 'Entrada'
-        produtos_em_estoque = Movimentacao.objects.annotate(
-            ultima_tipo=Subquery(ultima_movimentacao)  # Anota o tipo da última movimentação
-        ).filter(ultima_tipo='Entrada')  # Filtra apenas os que têm a última movimentação como 'Entrada'
+        # Extraímos uma lista de IDs das movimentações mais recentes
+        ids_movimentacoes = [
+            Movimentacao.objects
+            .filter(produto=item['produto'], id=item['ultima_id'])
+            .values_list('id', flat=True)[0]
+            for item in ultima_movimentacao
+        ]
 
-        return produtos_em_estoque
+        # Filtra apenas as movimentações do tipo 'Entrada'
+        return Movimentacao.objects.filter(
+            id__in=ids_movimentacoes, tipo='Entrada'
+        ).select_related('produto')
 
 
 class EstoqueLog(ListView):
