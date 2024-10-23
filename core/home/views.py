@@ -1,7 +1,14 @@
 from django.shortcuts import render
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from datetime import datetime
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, CreateView
+from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import CustomUserCreationForm
+from django.shortcuts import redirect
+from typing import Any
+from django.urls import reverse_lazy, reverse
+
 
 from estoque.models import Movimentacao
 from django.db.models import Subquery, OuterRef, Max
@@ -47,3 +54,37 @@ class EstoqueLog(ListView):
     model = Movimentacao
     template_name = 'home/estoque_log.html'
     context_object_name = 'movimentacoes'
+
+class loginEstoque(LoginView):
+    template_name = 'home/login.html'
+
+
+class logoutEstoque(LogoutView):
+    template_name = 'home/logout.html'
+
+
+class SignupEstoque(CreateView, LoginRequiredMixin):
+
+    form_class = CustomUserCreationForm
+    template_name = 'home/register.html'
+    success_url = reverse_lazy('home')
+
+
+    #daria para usar o ligin_url e redirecionar pra outro lugar se fosse o caso de o usuário NÃO estar logado
+    #mas como ele está logado: 
+
+    #precisamos dar override no metodo get 
+    #para permitir apenas q usuários não logados acessem o signin
+
+    def get(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+
+        if self.request.user.is_authenticated:
+            return redirect('home')
+
+        return super().get(request, *args, **kwargs)
+    
+    #isso aqui eh pra salvar o form (mesmo que a create view ja faca isso)
+    def form_valid(self, form):
+        # Salva o usuário e redireciona para a página de sucesso
+        form.save()
+        return HttpResponseRedirect(self.success_url)

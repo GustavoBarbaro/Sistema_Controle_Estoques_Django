@@ -14,23 +14,23 @@
 
             <div class="ms-auto">
 
-{% comment %}
-                {% if user.is_authenticated %}
 
+                {% if user.is_authenticated %}
+{% comment %} 
                     <a href="{% url 'notes.list' %}" class="btn btn-outline-light me-1">Home</a>
                     <a href="{% url 'notes.new' %}" class="btn btn-outline-light me-1">Create</a>
-
-                    <form method="POST" action="{% url 'logout' %}"> {% csrf_token %}
+ {% endcomment %}
+                    <form method="POST" action="{% url 'home.logout' %}"> {% csrf_token %}
                         <button type='submit' class="btn btn-outline-light me-1">Logout</button>
                     </form>
                     
                 {% else %}
                     
-                    <a href="{% url 'login' %}" class="btn btn-outline-light me-1">Login</a>
-                    <a href="{% url 'signup' %}" class="btn btn-outline-light me-1">Signup</a>
+                    <a href="{% url 'home.login' %}" class="btn btn-outline-light me-1">Login</a>
+                    <a href="{% url 'home.signup' %}" class="btn btn-outline-light me-1">Signup</a>
 
                 {% endif %} 
-{% endcomment %}
+
             </div>
 
         </nav>
