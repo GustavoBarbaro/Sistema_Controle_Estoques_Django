@@ -4,6 +4,7 @@ from datetime import datetime
 from django.views.generic import TemplateView, ListView, CreateView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import login
 from .forms import CustomUserCreationForm
 from django.shortcuts import redirect
 from typing import Any
@@ -23,10 +24,12 @@ class HomeView(TemplateView):
         return context
     
 
-class EstoqueView(ListView):
+class EstoqueView(LoginRequiredMixin, ListView):
     model = Movimentacao
     template_name = 'home/estoque_list.html'
     context_object_name = 'estoque'  # Nome do contexto para o template
+    redirect_field_name = 'next' # para redirecionar novamente para essa view apos o login
+    login_url = '/login'
 
     def get_queryset(self):
         # Obtemos o ID da última movimentação para cada produto
@@ -50,10 +53,12 @@ class EstoqueView(ListView):
         ).select_related('produto')
 
 
-class EstoqueLog(ListView):
+class EstoqueLog(LoginRequiredMixin, ListView):
     model = Movimentacao
     template_name = 'home/estoque_log.html'
     context_object_name = 'movimentacoes'
+    redirect_field_name = 'next' # para redirecionar novamente para essa view apos o login
+    login_url = '/login'
 
 class loginEstoque(LoginView):
     template_name = 'home/login.html'
@@ -68,6 +73,7 @@ class SignupEstoque(CreateView, LoginRequiredMixin):
     form_class = CustomUserCreationForm
     template_name = 'home/register.html'
     success_url = reverse_lazy('home')
+    # success_url = '/'
 
 
     #daria para usar o ligin_url e redirecionar pra outro lugar se fosse o caso de o usuário NÃO estar logado
@@ -85,6 +91,7 @@ class SignupEstoque(CreateView, LoginRequiredMixin):
     
     #isso aqui eh pra salvar o form (mesmo que a create view ja faca isso)
     def form_valid(self, form):
-        # Salva o usuário e redireciona para a página de sucesso
-        form.save()
-        return HttpResponseRedirect(self.success_url)
+        user = form.save()  # Salva o novo usuário
+        # Autentica e faz login do usuário recém-criado
+        login(self.request, user)  
+        return redirect(self.success_url)  # Redireciona para a home

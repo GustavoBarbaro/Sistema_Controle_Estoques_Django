@@ -6,9 +6,10 @@
 
     <p>Data Atual : {{today}}</p>
 
-    <a href="{% url 'home.estoque' %}" class="btn btn-primary">Ir para Estoque</a>
-    <a href="{% url 'home.LogEstoque' %}" class="btn btn-primary">Ir para log completo</a>
-
+    {% if user.is_authenticated %}
+        <a href="{% url 'home.estoque' %}" class="btn btn-primary">Ir para Estoque</a>
+        <a href="{% url 'home.LogEstoque' %}" class="btn btn-primary">Ir para log completo</a>
+    {% endif %}
 
 {% endblock %}
 
