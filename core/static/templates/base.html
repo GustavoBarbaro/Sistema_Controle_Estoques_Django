@@ -12,6 +12,14 @@
 
         <nav class="navbar navbar-dark bg-dark d-flex justify-content-between align-items-center px-3">
 
+            <div class="d-flex align-items-center">
+                {% if user.is_authenticated %}
+                    <div class="bg-light text-dark px-3 py-2 rounded">
+                        Logado como: {{ user.username }}
+                    </div>
+                {% endif %}
+            </div>
+
             <div class="ms-auto">
 
                 <a href="{% url 'home' %}" class="btn btn-outline-light">Home</a>
