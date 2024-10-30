@@ -17,11 +17,7 @@ from django.db.models import Subquery, OuterRef, Max
 
 class HomeView(TemplateView):
     template_name = 'home/welcome.html'
-    extra_content = {'today': datetime.today()}
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['today'] = datetime.now()  # Use datetime.now() para obter a data e hora atuais
-        return context
+    
     
 
 class EstoqueView(LoginRequiredMixin, ListView):

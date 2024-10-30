@@ -2,14 +2,77 @@
 
 {% block content %}
 
-    <body><h1>Sistema de Controle de Estoque</h1></body>
 
-    <p>Data Atual : {{today}}</p>
+    <section class="hero-section">
+        <div class="container">
+            <h1>Sistema de Controle de Estoque</h1>
+            <p class="lead">Acompanhe entradas, saídas e estoque em tempo real com facilidade.</p>
 
-    {% if user.is_authenticated %}
-        <a href="{% url 'home.estoque' %}" class="btn btn-primary">Ir para Estoque</a>
-        <a href="{% url 'home.LogEstoque' %}" class="btn btn-primary">Ir para log completo</a>
-    {% endif %}
+            {% if user.is_authenticated %}
+                <a href="{% url 'home.estoque' %}" class="btn btn-light btn-lg">Ir para Estoque</a>
+                <a href="{% url 'home.LogEstoque' %}" class="btn btn-light btn-lg">Ir para log completo</a>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5">
+        <div class="container text-center">
+            <h2 class="mb-5">Funcionalidades</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card p-4">
+                        <i class="fas fa-box-open feature-icon"></i>
+                        <h5 class="mt-3">Gestão de Produtos</h5>
+                        <p>Adicione e remova produtos com facilidade. Graças a praticidade do ESP32 e do leitor RFID</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-4">
+                        <i class="fas fa-chart-line feature-icon"></i>
+                        <h5 class="mt-3">Relatórios Precisos</h5>
+                        <p>Visualize relatórios de movimentações e estoque em tempo real.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-4">
+                        <i class="fas fa-users feature-icon"></i>
+                        <h5 class="mt-3">Controle de Usuários</h5>
+                        <p>Gerencie permissões e acesso dos usuários ao sistema.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Depoimentos</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card p-4">
+                        <p><i class="fas fa-quote-left"></i> O sistema simplificou a gestão de nosso estoque, melhorando a eficiência da nossa operação.</p>
+                        <p class="text-end">— Cliente Satisfeito</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card p-4">
+                        <p><i class="fas fa-quote-left"></i> Agora conseguimos controlar o inventário em tempo real, sem complicações.</p>
+                        <p class="text-end">— Usuário Feliz</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center">
+        <div class="container">
+            <p>&copy; 2024 EstoquePro. Todos os direitos reservados.</p>
+            
+        </div>
+    </footer>
+
+    
 
 {% endblock %}
 

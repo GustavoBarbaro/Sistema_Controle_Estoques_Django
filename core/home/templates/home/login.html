@@ -2,12 +2,15 @@
 
 {% block content %}
 
-<form method="POST"> {% csrf_token %}
+<div class="my-5">
 
-    {{form.as_p}}
+    <form method="POST"> {% csrf_token %}
 
-    <input type='submit' class="btn btn-secondary"/>
+        {{form.as_p}}
 
-</form>
+        <input type='submit' class="btn btn-secondary"/>
+
+    </form>
+</div>
 
 {% endblock %}

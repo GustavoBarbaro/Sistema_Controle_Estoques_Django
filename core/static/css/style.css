@@ -3,3 +3,33 @@
 }
 
 ul.errorlist{display:none}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #007bff !important;
+}
+.hero-section {
+    background: linear-gradient(to right, #007bff, #00c6ff);
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+}
+.feature-icon {
+    font-size: 3rem;
+    color: #007bff;
+}
+.card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+footer {
+    background-color: #343a40;
+    color: white;
+    padding: 20px 0;
+}
+footer a {
+    color: #adb5bd;
+}
+footer a:hover {
+    color: white;
+}
