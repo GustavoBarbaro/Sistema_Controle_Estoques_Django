@@ -5,6 +5,10 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from .models import Movimentacao, Produto, Usuario  # Importe o modelo da tabela de Movimentação
 
+from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
+
+
 
 @csrf_exempt  # Desativa a verificação CSRF para permitir requisições externas
 def criar_movimentacao(request):
@@ -41,6 +45,21 @@ def criar_movimentacao(request):
             # Cria uma nova instância de Movimentação
             movimentacao = Movimentacao(produto_id=produto_id, usuario_id=usuario_id, data=dia, tipo=tipo)
             movimentacao.save()  # Salva no banco de dados
+
+            channel_layer = get_channel_layer()
+            async_to_sync(channel_layer.group_send)(
+                "estoque_updates",
+                {
+                    "type": "estoque_update",
+                    "message": {
+                        "produto_id": produto_id,
+                        "usuario_id": usuario_id,
+                        "data": dia,
+                        "tipo": tipo,
+                    },
+                },
+            )
+
 
             # Retorna uma resposta de sucesso
             return JsonResponse({'status': 'Movimentacao criada com sucesso'}, status=201)

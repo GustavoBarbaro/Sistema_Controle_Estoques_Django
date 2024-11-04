@@ -30,4 +30,26 @@
         </tbody>
     </table>  
 
+    <script>
+        const estoqueSocket = new WebSocket(
+            'ws://' + window.location.host + '/ws/estoque/'
+        );
+    
+        estoqueSocket.onopen = function() {
+            console.log("WebSocket conectado.");
+        };
+    
+        estoqueSocket.onmessage = function(e) {
+            console.log("Mensagem recebida do WebSocket:", e.data);
+            const data = JSON.parse(e.data);
+
+            location.reload();
+
+        };
+    
+        estoqueSocket.onclose = function(e) {
+            console.error('WebSocket fechado inesperadamente.');
+        };
+    </script>
+
 {% endblock %}
