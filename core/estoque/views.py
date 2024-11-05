@@ -7,6 +7,8 @@ from .models import Movimentacao, Produto, Usuario  # Importe o modelo da tabela
 
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
+
 
 
 
@@ -43,7 +45,7 @@ def criar_movimentacao(request):
                     return JsonResponse({'error' : 'O Produto nao esta no estoque'}, status=400)
 
             # Cria uma nova instância de Movimentação
-            movimentacao = Movimentacao(produto_id=produto_id, usuario_id=usuario_id, data=dia, tipo=tipo)
+            movimentacao = Movimentacao(produto_id=produto_id, usuario_id=usuario_id, tipo=tipo)
             movimentacao.save()  # Salva no banco de dados
 
             channel_layer = get_channel_layer()
@@ -54,7 +56,7 @@ def criar_movimentacao(request):
                     "message": {
                         "produto_id": produto_id,
                         "usuario_id": usuario_id,
-                        "data": dia,
+                        "data": movimentacao.data.strftime('%Y-%m-%d %H:%M:%S'),
                         "tipo": tipo,
                     },
                 },
