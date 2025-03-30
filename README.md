@@ -10,7 +10,7 @@ Este repositório contém o projeto Web com o banco de dados.
 Para o código fonte do hardware, com o ESP32 e o leitor RFID confira este repositório:
 
 
-[![GitHub Repo](https://img.shields.io/badge/GustavoBarbaro-TCC__Leitor__RFID-blue?style=flat)](https://github.com/GustavoBarbaro/TCC-Leitor-RFID)
+[![GitHub Repo](https://img.shields.io/badge/GustavoBarbaro-TCC__Leitor__RFID-blue?style=flat&logo=github)](https://github.com/GustavoBarbaro/TCC-Leitor-RFID)
 
 
 ---
