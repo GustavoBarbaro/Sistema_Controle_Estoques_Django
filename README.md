@@ -104,6 +104,11 @@ Acesse o sistema em:
 * http://localhost:8000 caso esteja no Windows
 * http://your_local_IP_Address:8000 caso esteja no WSL ou Linux
 
+---
+
+# Banco de dados
+
+<img src='https://github.com/user-attachments/assets/4a160b63-0d6c-4335-8273-fb8fb22fce53' width='700px' height='500px'>
 
 ---
 
@@ -126,5 +131,7 @@ O sistema segue uma estrutura MVC (Model-View-Controller) adaptada ao Django (MT
 
 
 Django; Bootstrap; RFID; Banco de Dados; WebSockets; Backend Python; Fullstack Development; API REST
+
+
 
 
