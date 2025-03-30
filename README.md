@@ -1,16 +1,16 @@
-[![OS - Windows](https://img.shields.io/badge/OS-Windows-blue?logo=windows&logoColor=white)](https://www.microsoft.com/ "Go to Microsoft homepage") ![GitHub Repo](https://img.shields.io/badge/GustavoBarbaro-Sistema__Controle__Estoques__Django-blue?style=flat-square) [![License](https://img.shields.io/badge/License-MIT-yellow)](#license) [![Made with Python](https://img.shields.io/badge/Python-=3.12.3-blue?logo=python&logoColor=white)](https://python.org "Go to Python homepage") ![GitHub last commit](https://img.shields.io/github/last-commit/GustavoBarbaro/Sistema_Controle_Estoques_Django)
+[![OS - Windows](https://img.shields.io/badge/OS-Windows-blue?logo=windows&logoColor=white)](https://www.microsoft.com/ "Go to Microsoft homepage") [![GitHub Repo](https://img.shields.io/badge/GustavoBarbaro-Sistema__Controle__Estoques__Django-blue?style=flat)](https://github.com/GustavoBarbaro/Sistema_Controle_Estoques_Django) [![License](https://img.shields.io/badge/License-MIT-yellow)](#license) [![Made with Python](https://img.shields.io/badge/Python-=3.12.3-blue?logo=python&logoColor=white)](https://python.org "Go to Python homepage") ![GitHub last commit](https://img.shields.io/github/last-commit/GustavoBarbaro/Sistema_Controle_Estoques_Django)
 
 # Sistema de Controle de Estoque com Django
 
 
-Este projeto é um Sistema de Controle de Estoque desenvolvido em Django e um ESP32 com interface em Bootstrap e suporte a leitura de RFID. Ele permite registrar movimentações de produtos (entradas e saídas), armazenando as informações em um banco de dados relacional.
+Este projeto é um Sistema de Controle de Estoque desenvolvido em Django e um ESP32 com interface responsiva em Bootstrap e suporte a leitura de RFID. Ele permite registrar movimentações de produtos (entradas e saídas), armazenando as informações em um banco de dados relacional.
 
 Este repositório contém o projeto Web com o banco de dados.
 
 Para o código fonte do hardware, com o ESP32 e o leitor RFID confira este repositório:
 
 
-![GitHub Repo](https://img.shields.io/badge/GustavoBarbaro-TCC__Leitor__RFID-blue?style=flat-square)
+[![GitHub Repo](https://img.shields.io/badge/GustavoBarbaro-TCC__Leitor__RFID-blue?style=flat)](https://github.com/GustavoBarbaro/TCC-Leitor-RFID)
 
 
 ---
@@ -126,8 +126,5 @@ O sistema segue uma estrutura MVC (Model-View-Controller) adaptada ao Django (MT
 
 
 Django; Bootstrap; RFID; Banco de Dados; WebSockets; Backend Python; Fullstack Development; API REST
-
-
-
 
 
