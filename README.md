@@ -48,6 +48,14 @@ Para o código fonte do hardware, com o ESP32 e o leitor RFID confira este repos
 
 # Funcionalidades
 
+✅ Leitura de tags RFID em tempo real
+
+✅ Envio de dados para um servidor via HTTP
+
+✅ Conexão WiFi com ESP32
+
+✅ Compatível com o framework Arduino
+
 ✅Cadastro de produto e usuários
 
 ✅Registro de entradas e saídas de produtos
@@ -128,10 +136,19 @@ O sistema segue uma estrutura MVC (Model-View-Controller) adaptada ao Django (MT
 
 [YouTube](https://youtu.be/2zCVcu27XJM)
 
+---
+
+# Trabalho de Conclusão de Curso
+
+[TCC - Gustavo-Comprimido.pdf](https://github.com/user-attachments/files/19526488/TCC.-.Gustavo-Comprimido.pdf)
+
+
+---
+
 # Palavras-chave
 
 
-Django; Bootstrap; RFID; Banco de Dados; WebSockets; Backend Python; Fullstack Development; API REST
+Django; Bootstrap; RFID; Banco de Dados; WebSockets; Backend Python; Fullstack Development; API REST; ESP32; RFID; IoT; HTTP; HTTP Requests; Arduino Framework; Automação; PlatformIO
 
 
 
