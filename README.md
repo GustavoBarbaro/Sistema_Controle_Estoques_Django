@@ -33,6 +33,7 @@ Para o código fonte do hardware, com o ESP32 e o leitor RFID confira este repos
 
 ### Hardware
 * ![ESP](https://img.shields.io/badge/ESP32-E7352C?style=for-the-badge&logo=espressif&logoColor=white)
+* ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
 
 ---
 
